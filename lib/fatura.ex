@@ -14,8 +14,10 @@ defmodule Fatura do
     for vencimento <- vencimentos, fatura <- faturas do
       "Fatura: #{fatura}, vence no dia: #{vencimento}"
     end
+  end
 
-
+  def faturas_a_pagar(faturas, quantidade) do
+    Enum.split(faturas, quantidade)
   end
 
   @doc """
