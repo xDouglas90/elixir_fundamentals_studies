@@ -6,7 +6,7 @@ defmodule Fatura do
   @doc """
     Ao receber `fatura` retorna um array de faturas
       ## Exemplos
-      iex> Fatura.criar_faturas(["Internet", "Luz", "Condominio"])
+      iex> Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
       ["Internet", "Luz", "Condominio"]
   """
 
@@ -19,6 +19,12 @@ defmodule Fatura do
   def faturas_a_pagar(faturas, quantidade) do
     Enum.split(faturas, quantidade)
   end
+
+  def save(nome_arquivo, faturas) do
+    binary = :erlang.term_to_binary(faturas)
+    File.write(nome_arquivo, binary)
+  end
+
 
   @doc """
     Ao receber `fatura` retorna um array de faturas ordenado
