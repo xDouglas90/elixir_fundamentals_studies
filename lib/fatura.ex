@@ -7,7 +7,17 @@ defmodule Fatura do
     Ao receber `fatura` retorna um array de faturas
       ## Exemplos
       iex> Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
-      ["Internet", "Luz", "Condominio"]
+      [
+        %Fatura.Conta{fatura: "Internet", vencimento: 5},
+        %Fatura.Conta{fatura: "Luz", vencimento: 5},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 5},
+        %Fatura.Conta{fatura: "Internet", vencimento: 10},
+        %Fatura.Conta{fatura: "Luz", vencimento: 10},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 10},
+        %Fatura.Conta{fatura: "Internet", vencimento: 20},
+        %Fatura.Conta{fatura: "Luz", vencimento: 20},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 20}
+      ]
   """
 
   def criar_faturas(faturas, vencimentos) do
@@ -41,8 +51,19 @@ defmodule Fatura do
   @doc """
     Ao receber `fatura` retorna um array de faturas ordenado
       ## Exemplos
-      iex> Fatura.ordena_fatura(Fatura.criar_fatura(["Internet", "Luz", "Condominio"]))
-      ["Condominio", "Internet", "Luz"]
+      iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+      iex> Fatura.ordena_fatura(faturas)
+      [
+        %Fatura.Conta{fatura: "Condominio", vencimento: 5},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 10},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 20},
+        %Fatura.Conta{fatura: "Internet", vencimento: 5},
+        %Fatura.Conta{fatura: "Internet", vencimento: 10},
+        %Fatura.Conta{fatura: "Internet", vencimento: 20},
+        %Fatura.Conta{fatura: "Luz", vencimento: 5},
+        %Fatura.Conta{fatura: "Luz", vencimento: 10},
+        %Fatura.Conta{fatura: "Luz", vencimento: 20}
+      ]
   """
 
   def ordena_fatura(faturas) do
@@ -52,7 +73,8 @@ defmodule Fatura do
   @doc """
     Ao receber `faturas` e um elento de `fatura` retorna se existe ou nao
       ## Exemplos
-      iex> Fatura.fatura_existe?(Fatura.criar_fatura(["Internet", "Luz", "Condominio"]), "Luz")
+      iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+      iex> Fatura.fatura_existe?(faturas, %Fatura.Conta{fatura: "Luz", vencimento: 20})
       true
   """
 
