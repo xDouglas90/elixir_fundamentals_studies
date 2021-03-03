@@ -3,17 +3,24 @@ defmodule FaturaTest do
   doctest Fatura
 
   test "deve criar uma lista de faturas" do
-    faturas = Fatura.criar_fatura(["Internet", "Luz", "Condominio"])
-    assert faturas == ["Internet", "Luz", "Condominio"]
+    faturas = Fatura.criar_faturas(["Internet"], [5, 10])
+    assert faturas == [
+      %Fatura.Conta{fatura: "Internet", vencimento: 5},
+      %Fatura.Conta{fatura: "Internet", vencimento: 10}
+    ]
   end
 
   test "deve ordenar uma lista de faturas" do
-    faturas = Fatura.criar_fatura(["Internet", "Luz", "Condominio"])
-    refute Fatura.ordena_fatura(faturas) == ["Internet", "Luz", "Condominio"]
+    faturas = Fatura.criar_faturas(["Luz", "Condominio"], [5])
+    refute Fatura.ordena_fatura(faturas) == [
+      %Fatura.Conta{fatura: "Luz", vencimento: 5},
+      %Fatura.Conta{fatura: "Condominio", vencimento: 5}
+    ]
   end
 
   test "deve verificar se a conta existe" do
-    assert Fatura.fatura_existe?(Fatura.criar_fatura(["Internet", "Luz", "Condominio"]), "Luz") == true
+    faturas = Fatura.criar_faturas(["Luz", "Condominio"], [5])
+    assert Fatura.fatura_existe?(faturas, %Fatura.Conta{fatura: "Luz", vencimento: 5}) == true
   end
 
 end
