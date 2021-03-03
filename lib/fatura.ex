@@ -26,8 +26,10 @@ defmodule Fatura do
   end
 
   def load(nome_arquivo) do
-    {status, binario} = File.read(nome_arquivo)
-    :erlang.binary_to_term(binario)
+    case File.read(nome_arquivo) do
+      {:ok, binario}-> :erlang.binary_to_term binario
+      {:error, _erro} -> "Nao foi possivel carregar o arquivo"
+    end
   end
 
   @doc """
