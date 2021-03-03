@@ -2,7 +2,7 @@
 Mini projeto com intuito de estudo dos fundamentos basicos da linguagem funcional Elixir.
 
  ## Funções
- ###criar_faturas
+ ### criar_faturas
    Ao receber `fatura` e `vencimento` retorna um array de faturas
 ```elixir
       iex> Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
