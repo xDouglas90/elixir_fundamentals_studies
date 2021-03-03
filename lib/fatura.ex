@@ -4,7 +4,7 @@ defmodule Fatura do
   """
 
   @doc """
-    Ao receber `fatura` retorna um array de faturas
+    Ao receber `fatura` e `vencimento` retorna um array de faturas
       ## Exemplos
       iex> Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
       [

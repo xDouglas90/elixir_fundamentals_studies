@@ -1,6 +1,85 @@
-# Fatura
+## Estudo dos Fundamentos basicos de Elixir
+Mini projeto com intuito de estudo dos fundamentos basicos da linguagem funcional Elixir.
 
-**TODO: Add description**
+ ## Funções
+ ###criar_faturas
+   Ao receber `fatura` e `vencimento` retorna um array de faturas
+      ## Exemplos
+      iex> Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+      [
+        %Fatura.Conta{fatura: "Internet", vencimento: 5},
+        %Fatura.Conta{fatura: "Luz", vencimento: 5},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 5},
+        %Fatura.Conta{fatura: "Internet", vencimento: 10},
+        %Fatura.Conta{fatura: "Luz", vencimento: 10},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 10},
+        %Fatura.Conta{fatura: "Internet", vencimento: 20},
+        %Fatura.Conta{fatura: "Luz", vencimento: 20},
+        %Fatura.Conta{fatura: "Condominio", vencimento: 20}
+      ]
+### pagar_faturas
+  Ao receber dados para gerar fatura, deve ordenar e salvar em um arquivo binario.
+      ## Exemplos
+        iex> Fatura.pagar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20], 1, "pagar")
+        :ok
+		
+
+### faturas_a_pagar
+   Ao receber o `nome_arquivo` e `faturas`, salva em arquivo binario e retorna :ok.
+      ## Exemplos
+        iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+        iex> Fatura.save(faturas, "file")
+        :ok
+
+### save
+   Ao receber o `nome_arquivo` e `faturas`, salva em arquivo binario e retorna :ok.
+      ## Exemplos
+        iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+        iex> Fatura.save(faturas, "file")
+        :ok
+  """
+### load
+   Ao receber `nome_arquivo`, retorna o seu conteudo.
+      ## Exemplos
+        iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+        iex> Fatura.save(faturas, "file")
+        iex> Fatura.load("file")
+        [
+          %Fatura.Conta{fatura: "Internet", vencimento: 5},
+          %Fatura.Conta{fatura: "Luz", vencimento: 5},
+          %Fatura.Conta{fatura: "Condominio", vencimento: 5},
+          %Fatura.Conta{fatura: "Internet", vencimento: 10},
+          %Fatura.Conta{fatura: "Luz", vencimento: 10},
+          %Fatura.Conta{fatura: "Condominio", vencimento: 10},
+          %Fatura.Conta{fatura: "Internet", vencimento: 20},
+          %Fatura.Conta{fatura: "Luz", vencimento: 20},
+          %Fatura.Conta{fatura: "Condominio", vencimento: 20}
+        ]
+
+### ordena_fatura
+   Ao receber `fatura` retorna um array de faturas ordenado
+```elixir
+        iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+        iex> Fatura.ordena_fatura(faturas)
+        [
+          %Fatura.Conta{fatura: "Condominio", vencimento: 5},
+          %Fatura.Conta{fatura: "Condominio", vencimento: 10},
+          %Fatura.Conta{fatura: "Condominio", vencimento: 20},
+          %Fatura.Conta{fatura: "Internet", vencimento: 5},
+          %Fatura.Conta{fatura: "Internet", vencimento: 10},
+          %Fatura.Conta{fatura: "Internet", vencimento: 20},
+          %Fatura.Conta{fatura: "Luz", vencimento: 5},
+          %Fatura.Conta{fatura: "Luz", vencimento: 10},
+          %Fatura.Conta{fatura: "Luz", vencimento: 20}
+        ]
+```
+### fatura_existe?
+  Ao receber `faturas` e um elento de `fatura` retorna se existe ou nao
+```elixir
+        iex> faturas = Fatura.criar_faturas(["Internet", "Luz", "Condominio"], [5, 10, 20])
+        iex> Fatura.fatura_existe?(faturas, %Fatura.Conta{fatura: "Luz", vencimento: 20})
+        true
+```
 
 ## Installation
 
@@ -14,8 +93,4 @@ def deps do
   ]
 end
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/fatura](https://hexdocs.pm/fatura).
 
