@@ -1,5 +1,5 @@
 ## Estudo dos Fundamentos basicos de Elixir
-Mini projeto com intuito de estudo dos fundamentos basicos da linguagem funcional Elixir.
+Mini projeto com intuito de estudo dos fundamentos basicos da linguagem funcional Elixir. 
 
  ## Funções
  ### criar_faturas
